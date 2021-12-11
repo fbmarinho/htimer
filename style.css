@@ -1,0 +1,85 @@
+* {
+  font-family: verdana;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+input[type="number"] {
+  background-color: rgba(0, 0, 0, 0);
+  color: lime;
+  font-size: 40px;
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100px;
+}
+
+input[type="button"] {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: black;
+  font-size: 50px;
+  border-radius: 30px;
+  padding: 30px;
+  border: none;
+  margin: 50px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: white;
+  background-color: #333;
+  height: 100vh;
+  width: 100vw;
+}
+
+.fcc {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#display {
+  font-size: 60px;
+  width: 100vw;
+}
+
+#fields {
+  flex-direction: row;
+}
+
+#footer {
+  color: #666;
+  font-size: 10px;
+}
+
+span {
+  margin: 15px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+svg {
+  width: 80px;
+  height: 80px;
+  filter: invert(100%) brightness(15%);
+}
+
+.on {
+  filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg)
+    brightness(119%) contrast(119%);
+}
+
+@media screen and (max-device-width: 480px) {
+  #fields {
+    flex-direction: column;
+  }
+}

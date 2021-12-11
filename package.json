@@ -1,0 +1,9 @@
+{
+  "name": "htimer",
+  "version": "1.0.0",
+  "description": "Simples timer para atividades de hora em hora",
+  "main": "index.js",
+  "repository": "https://github.com/fbmarinho/htimer.git",
+  "author": "Felipe Marinho <felipegigamail@gmail.com>",
+  "license": "MIT"
+}
