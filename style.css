@@ -78,6 +78,29 @@ svg {
     brightness(119%) contrast(119%);
 }
 
+#controls {
+display:none;
+width: 100%;
+flex-direction: row;
+align-items: center;
+justify-content: space-around;
+}
+
+#controls input{
+
+  width: 150px;
+
+}
+
+button {
+  width: 40;
+  height: 40;
+  font-size: 30px;
+  color: lime;
+  background-color: transparent;
+  border: 0px solid transparent;
+}
+
 @media screen and (max-device-width: 480px) {
   #fields {
     flex-direction: column;

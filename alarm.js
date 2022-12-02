@@ -1,9 +1,18 @@
+Object.prototype.forEach = Array.prototype.forEach
+var note = 0;
+
 window.addEventListener("load", () => {
+
+  
+  var delay = 0;
+
   var display = document.getElementById("display");
   var minuto = document.getElementById("minuto");
   var duracao = document.getElementById("duracao");
   var power = document.getElementById("power");
   var btnState = localStorage.getItem("btnstate") || false;
+  var noteInput = document.getElementById("note");
+  var delayInput = document.getElementById("delay");
 
   if (btnState === "true") {
     power.classList.add("on");
@@ -11,6 +20,14 @@ window.addEventListener("load", () => {
 
   minuto.value = localStorage.getItem("minuto") || 0;
   duracao.value = localStorage.getItem("duracao") || 10;
+
+  console.log(note, delay)
+  note = localStorage.getItem("note") || 3000;
+  delay = localStorage.getItem("delay") || 1000;
+  noteInput.value = note;
+  delayInput.value = delay;
+
+  console.log(note, delay)
 
   minuto.addEventListener("change", (e) => {
     if (e.currentTarget.value > 59) {
@@ -25,8 +42,9 @@ window.addEventListener("load", () => {
     }
     localStorage.setItem("duracao", e.currentTarget.value);
   });
-
-  setInterval(() => {
+  var timer = {};
+  var setTimer = (ms) => {
+    timer = setInterval(() => {
     let date = new Date();
 
     var hour = date.getHours();
@@ -51,11 +69,13 @@ window.addEventListener("load", () => {
       seconds < parseInt(duracao.value) &&
       btnState === "true"
     ) {
-      playNote("3000", "sine", 1);
+      playNote(note, "sine", 1);
     }
 
     display.innerHTML = formatedDate;
-  }, 1000);
+  }, ms)};
+
+  setTimer(delay);
 
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
@@ -90,10 +110,47 @@ window.addEventListener("load", () => {
       e.currentTarget.classList.remove("on");
       btnState = "false";
       localStorage.setItem("btnstate", btnState);
+      controls.style.display = "none";
       return;
     }
     e.currentTarget.classList.add("on");
     btnState = "true";
     localStorage.setItem("btnstate", btnState);
+    
   });
-});
+
+
+
+  var footer = document.getElementById("footer");
+  var controls = document.getElementById("controls");
+
+
+  var opencounter = 0;
+  footer.addEventListener('click', ()=>{
+    if(opencounter == 3){
+      controls.style.display = "flex"
+      opencounter = 0;
+    }
+    opencounter++
+  })
+
+
+  var buttons = document.getElementsByTagName("button");
+  buttons.forEach((btn)=>{
+    btn.addEventListener('click',(e)=>{
+      var name = e.target.dataset.from;
+      var direction = e.target.name;
+      var input = document.getElementById(name);
+      console.log(name, input.value)
+      direction == "up" ? input.stepUp() : input.stepDown();
+      this[name] = parseInt(input.value);
+      localStorage.setItem(name, input.value);
+      if(name=="delay") {
+        clearInterval(timer);
+        setTimer(parseInt(input.value));
+      };
+    })
+  })
+  
+
+}); 
